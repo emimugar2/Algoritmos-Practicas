@@ -1,0 +1,63 @@
+Análisis empírico de la complejidad computacional del algoritmo de Dijkstra
+
+Autor:
+- Emilio Martínez Varela
+
+Maquina utilizada para la medicion de tiempos:
+- CPU: Procesador Intel(R) Core(TM) i7-6700HQ CPU @ 2.60GHz, 2592 Mhz
+- RAM: 8 Gb
+- Sistema Operativo: Ubuntu 18.04.1 LTS
+
+Introducción:
+En esta práctica implementaremos en lenguaje C el tiempo que se medirá en microsegundos(ms) que tarda
+la máquina en realizar el algoritmo de Dijkstra para obtener un árbol de recubrimiento mínimo de grafos aleatorios.
+Para conocer el tiempo creamos matrices aleatorias que representan los grafos. 
+Estas matrices son de n*n elementos, lo que nos daría una complejidad cúbica, 
+pero en la práctica veremos que no es del orden n^3 completamente.
+
+Al generar vectores aleatorios siempre tenderemos a un caso medio. 
+Esto no tendrá mayor importancia a la hora del estudio de las cotas, puesto que, teóricamente, sigue siempre la misma complejidad.
+En el caso de que el tiempo de ejecución del algoritmo fuese menor que 500 ms, entraríamos en un bucle que se repetiría 1000 veces
+ para luego calcular su media aritmética y se detalla en el informe.
+El rango de los elementos que usamos va desde n=20, es decir, 400 elementos, hasta n=640, es decir,409600 elementos siguiendo una progresión geométrica de n*2.
+Comenzamos en esta cifra porque consideramos que una menor no daría mucha información para el estudio de la cota.
+
+Hemos repetido el algoritmo varias veces y la medición más coherente ha sido la siguiente:
+
+
+Tabla tiempos-Dijkstra:
+
+--------------------------------------------------------------------------------------------
+    n        			t(n)        	t(n)/n^2.45    t(n)/n^2.9        t(n)/n^3.54
+--------------------------------------------------------------------------------------------
+       20*               98.82           0.064169         0.016667		0.002450
+       40               662.00           0.078670         0.014958		0.001411
+       80              4404.00           0.095780         0.013332		0.000807
+      160             29807.00           0.118638         0.012088		0.000470
+      320            231693.00           0.168770         0.012589		0.000314
+      640           2013135.00           0.268369         0.014654		0.000234
+
+
+Cota inferior = n^2.45 -> Cota subestimada
+Cota ajustada = n^2.9
+Cota superior = n^3.54 -> Cota sobreestimada
+
+
+ - Tiempos medidos en microsegundos
+ - En t(n), '*' indica que el tiempo no fue calculado con una ejecución del
+algoritmo, sino con la media de K ejecuciones ya que el tiempo es demasiado
+bajo (< 500 microsegundos).
+Asi obtenemos un tiempo mas preciso. En concreto utilizamos K = 1000
+siempre que fuese necesario.
+
+
+
+
+
+Conclusiones:
+
+Como podemos observar, la complejidad del algoritmo es de O(n^2.9). Esta cota dista de la cota teórica O(n^3),
+aunque no demasiado. En la práctica se puede apreciar como la cota real se desvía ligeramente a la cota teórica.
+Como podemos apreciar, el algoritmo ha entrado en varias ocasiones en el bucle de las 1000 iteraciones. 
+En conclusión, este algoritmo es potente para el problema que se plantea, puesto que operar con matrices 
+implica una complejidad cúbica y este algoritmo, en la práctica, consigue mejorarla un poco.

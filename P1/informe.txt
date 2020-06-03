@@ -1,0 +1,70 @@
+Emilio Martínez Varela
+
+La distribucion de SO utilizada para la comprobacion de tiempos de estos algoritmos es la siguiente:
+
+Equipo CABANAS_32 del laboratorio 0.0.2
+Distributor ID:	Ubuntu
+Description:	Ubuntu 18.04.1 LTS
+Release:	18.04
+Codename:	bionic
+
+	
+	Utilizamos dos algoritmos diferentes para calcular la suma de la subsecuencia maxima,
+        obteniendo asi los tiempos empleados por cada uno de estos algoritmos.
+
+	Cabe destacar que todas las mediciones de tiempo estan tomadas en microsegundos.
+	
+	Para el primer algoritmo (sumaSubMax1):
+	
+	La cota ajustada tiende a un valor contenido en el intervalo [0.005967] 
+
+========================================================================
+        n           t(n)       t(n)/n¹·8       t(n)/n²       t(n)/n²·²
+========================================================================
+       500       1527.000       0.021169       0.006108       0.001762
+      1000       5908.000       0.023520       0.005908       0.001484
+      2000      23993.000       0.027430       0.005998       0.001312
+      4000      95223.000       0.031263       0.005951       0.001133
+      8000     375914.000       0.035443       0.005874       0.000973
+     16000    1497342.000       0.040542       0.005849       0.000844
+     32000    5989332.000       0.046570       0.005849       0.000735	
+
+
+
+	* tiempos medidos (en microsegundos)
+
+	Cota subestimada:   h(n)=t(n)/n¹·8
+	Cota ajustada:	    g(n)=t(n)/n²
+	Cota sobreestimada: f(n)=t(n)/n²·2
+
+	Para el primer algoritmo (sumaSubMax2):
+	
+	La cota ajustada tiende a un valor contenido en el intervalo [0.12207]
+========================================================================
+           n            t(n)       t(n)/n^0·7         t(n)/n   t(n)/n¹·¹
+========================================================================
+(*)       500          8.000       0.103226       0.015999       0.008594
+(*)      1000         15.188       0.120643       0.015188       0.007612
+(*)      2000         26.813       0.131105       0.013406       0.006269
+(*)      4000         48.562       0.146170       0.012141       0.005297
+(*)      8000         90.833       0.168299       0.011354       0.004622
+(*)     16000        183.750       0.209577       0.011484       0.004362
+(*)     32000        336.271       0.236094       0.010508       0.003724
+
+	* tiempos medidos (en microsegundos)
+
+	Cota subestimada:   h(n)=t(n)/n^0·7
+	Cota ajustada:	    g(n)=t(n)/n
+	Cota sobreestimada: f(n)=t(n)/n¹·¹
+
+
+CONCLUSION:
+===========
+	
+La conclusion obtenida tras analizar el resultado de tiempos de los dos algoritmos
+es que la mejor opcion para cualquier n es el segundo algoritmo (sumaSubMax2) ya
+ que tanto para n pequeñas como n muy grandes su tiempo es realmente bajo.
+
+
+De los dos algoritmos, el primero tiene una complejidad computacional t(n) = O(n²) y el segundo t(n) = O(n).
+

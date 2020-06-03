@@ -1,0 +1,149 @@
+Analisis empirico de la creacion de monticulos y ordenacion por monticulos:
+
+Autor:
+- Emilio Martínez Varela
+
+Introduccion:
+En esta practica implementaremos en lenguaje C la estructura de datos
+monticulo de minimos junto con todas las operaciones necesarias para
+su uso. Implementaremos tambien el metodo de ordenacion por monticulos,
+que hara uso de la estructura antes mencionada para ordenar un vector dado ,
+y procederemos a medir sus tiempos de ejecucion para verificar empiricamente 
+la complejidad computacional de este algoritmo para tres distintos metodos 
+de inicializacion del vector: ascendente, descendente y aleatorio, con 
+longitudes desde 1000 hasta 128000 elementos.
+Asi mismo demostraremos empiricamente que la operacion crearMonticulo
+se ejecuta en un tiempo O(n) utilizando secuencias descendentes de numeros.
+
+
+Maquina utilizada para la medicion de tiempos:
+- CPU: Procesador Intel(R) Core(TM) i7-6700HQ CPU @ 2.60GHz, 2592 Mhz
+- RAM: 8 Gb
+- Sistema Operativo: Ubuntu 18.04.1 LTS
+
+
+Analisis de tiempos y complejidad de los algoritmos:
+ - Tiempos medidos en microsegundos
+ - En t(n), '*' indica que el tiempo no fue calculado con una ejecucion del 
+algoritmo, sino con la media de K ejecuciones ya que el tiempo es demasiado 
+bajo (< 500 microsegundos).
+Asi obtenemos un tiempo mas preciso. En concreto utilizamos K = 1000 
+siempre que fuese necesario.
+
+Tabla tiempos - Crear Montículo - Descendente
+---------------------------------------------------------------------------------------
+	n		t(n)		t(n)/n^0.8	t(n)		t(n)/n*log(n)
+---------------------------------------------------------------------------------------
+*       500                17.370 	 0.1203993 	 0.0347400 	 0.0055901 
+*      1000                34.695 	 0.1381233 	 0.0346950 	 0.0050226 
+*      2000                70.802 	 0.1618906 	 0.0354010 	 0.0046575 
+*      4000               140.805 	 0.1849141 	 0.0352013 	 0.0042442 
+*      8000               279.404 	 0.2107466 	 0.0349255 	 0.0038861 
+      16000               579.000 	 0.2508318 	 0.0361875 	 0.0037382 
+      32000              1177.000 	 0.2928576 	 0.0367813 	 0.0035457 
+      64000              2321.000 	 0.3316891 	 0.0362656 	 0.0032770 
+     128000              4672.000 	 0.3834731 	 0.0365000 	 0.0031038 
+
+Cota inferior = n^0.8 -> Cota subestimada
+Cota ajustada = -> Tiende a 0.035-0.036
+Cota superior = n*log(n) -> Cota sobreestimada    
+     
+Tabla tiempos - Montículos - Ascendente
+---------------------------------------------------------------------------------------
+   	  n 	 	t(n) 	t(n)/n^0.93 	 t(n)/n^0.98*log(n) 	 t(n)/n^1.6
+---------------------------------------------------------------------------------------
+*       500         120.945 	 0.3737211 	 0.0440743 	 	0.0058108 
+*      1000         265.969 	 0.4313515 	 0.0442073 	 	0.0042153 
+       2000         571.000 	 0.4860469 	 0.0437282 	 	0.0029853 
+       4000        1204.000 	 0.5379113 	 0.0428392 	 	0.0020765 
+       8000        2551.000 	 0.5981867 	 0.0424676 	 	0.0014513 
+      16000        5381.000 	 0.6622644 	 0.0421633 	 	0.0010099 
+      32000       11802.000 	 0.7623706 	 0.0437506 	 	0.0007307 
+      64000       24338.000 	 0.8251588 	 0.0428759 	 	0.0004970 
+     128000       50663.000 	 0.9015413 	 0.0425820 	 	0.0003413 
+
+Cota inferior = n^0.93 -> Cota subestimada
+Cota ajustada = (n^0.98)*log(n) -> Tiende a 0.042-0.043
+Cota superior = n^1.6 -> Cota sobreestimada
+
+
+
+Tabla tiempos - Montículos - Descendente
+---------------------------------------------------------------------------------------
+   	  n 	 	t(n) 	t(n)/n^0.93 	 t(n)/n^0.98*log(n) 	 t(n)/n^1.6
+---------------------------------------------------------------------------------------
+*       500         128.882 	 0.3982445 	 0.0469664 	 	0.0061921 
+*      1000         217.182 	 0.3522278 	 0.0360983 	 	0.0034421 
+*      2000         474.769 	 0.4041330 	 0.0363586 	 	0.0024822 
+       4000        1001.000 	 0.4472170 	 0.0356163 	 	0.0017264 
+       8000        2144.000 	 0.5027489 	 0.0356921 	 	0.0012198 
+      16000        4519.000 	 0.5561741 	 0.0354090 	 	0.0008481 
+      32000        9643.000 	 0.6229062 	 0.0357471 	 	0.0005970 
+      64000       20037.000 	 0.6793371 	 0.0352989 	 	0.0004092 
+     128000       41813.000 	 0.7440567 	 0.0351436 	 	0.0002817 
+     
+Cota inferior = n^0.93 -> Cota subestimada
+Cota ajustada = (n^0.98)*log(n) -> Tiende a 0.035-0.036
+Cota superior = n^1.6 -> Cota sobreestimada
+
+
+
+Tabla tiempos - Montículos - Aleatoria
+---------------------------------------------------------------------------------------
+	n		t(n)	t(n)/n^0.98	t(n)/n^0.98*log(n)	t(n)/n^1.6
+---------------------------------------------------------------------------------------
+*       500         129.060 	 0.2922804 	 0.0470312 	 	0.0062007 
+*      1000         287.057 	 0.3295853 	 0.0477124 	 	0.0045495 
+*      2000         615.954 	 0.3585412 	 0.0471709 	 	0.0032203 
+       4000        1127.000 	 0.3325869 	 0.0400995 	 	0.0019437 
+       8000        1851.000 	 0.2769352 	 0.0308144 	 	0.0010531 
+      16000        6188.000 	 0.4693672 	 0.0484866 	 	0.0011613 
+      32000       14625.000 	 0.5624046 	 0.0542156 	 	0.0009054 
+      64000       33066.000 	 0.6446519 	 0.0582518 	 	0.0006753 
+     128000       60740.000 	 0.6003562 	 0.0510516 		0.0004092 
+     
+Cota inferior = n^0.98 -> Cota subestimada
+Cota ajustada = (n^0.98)*log(n) -> Tiende a 0.040-0.050
+Cota superior = n^1.6 -> Cota sobreestimada
+
+
+
+Conclusiones:
+
+- Crear Monticulo:
+Observamos que la complejidad computacional de nuestro algoritmo de creacion 
+de monticulos a partir de un vector es lineal (corresponde a la teorica), 
+un buen resultado frente a otras opciones (por ejemplo: insertar uno a uno los 
+elementos del vector dado en el monticulo, O(n*log(n))).
+Un primer analisis del codigo del algoritmo parece indicar que su complejidad 
+sera n*log(n). Sin embargo, si tenemos en cuenta que la operacion principal 
+que se ejecuta es 'hundir' y en esta es 'intercambiar', podemos obtener la 
+complejidad a partir del numero de intercambios.
+Como el monticulo es un arbol binario completo, en cada intercambio de hundir 
+bajaremos por una arista u otra, y por la que usemos no se volvera a bajar.
+Asi, los padres de las hojas haran como mucho 1 intercambio; sus padres, 2...
+El numero maximo de intercambios sera menor que el numero de aristas, es decir,
+menor que n-1 (n = numero de nodos o elementos del vector). 
+Con lo cual tiene sentido que la complejidad de nuestro crear_monticulo 
+sea lineal.
+
+
+- Ordenacion con Monticulo:
+La ordenacion con monticulo tiene una complejidad teoria de n*log(n).
+Observamos que la ordenacion utilizando un monticulo de 3 vectores ( ascendente,
+descendente y aleatorio) tiene una complejidad (n^0.98)*log(n) en el caso aleatorio;
+en los casos ascendente y descendente, la cota teorica se queda un poco 
+sobreestimada; obtenemos una complejidad de (n^0.98)*log(n).
+Respecto a los tiempos, el caso aleatorio es el peor (aunque no por mucho), 
+mientras que ascendente y descendente estan muy igualados.
+El resultado es que tanto en tiempo como complejidad, los tres casos son muy 
+similares.
+Podemos concluir que la ordenacion con monticulo es un algoritmo de ordenacion 
+bastante 'estable', en el sentido de que obtendremos tiempos similares 
+independientemente del vector de entrada. Esto no ocurre con otros algoritmos, 
+como la ordenacion por insercion, donde obtenemos muy buenos tiempos, y una
+complejidad lineal con un vector muy ordenado, pero tiempos muy malos y una 
+complejidad cuadratica con el vector muy desordenado.
+La ordenacion con monticulo nos ofrece un resultado intermedio, no es mejor 
+que el mejor caso de algunos algoritmos pero no es peor que el peor caso.
+-------------------------------------------------------------------------

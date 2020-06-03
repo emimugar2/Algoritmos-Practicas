@@ -1,0 +1,119 @@
+
+Analisis empirico de un algoritmo para la ordenacion de vectores.
+
+Autor:
+- Emilio Martínez Varela
+
+Introduccion:
+ En este examen analizo los tiempos de un algoritmos de 
+ordenacion implementado en C. Los vectores a ordenar seran generados 
+en orden ascendente(ya ordenado) en orden descendente 
+(ordenado inversamente) y de manera aleatoria.
+
+
+Maquina utilizada para la medicion de tiempos:
+- Máquina de laboratorio LAGO_148
+- Sistema Operativo: Ubuntu 18.04.1 LTS
+
+
+Analisis de tiempos y complejidad de los algoritmos:
+ * Tiempos medidos en microsegundos
+ * En t(n), '*' indica que el tiempo no se calculo con una ejecucion del 
+algoritmo, sino con la media de K ejecuciones ya que el tiempo de una es 
+demasiado bajo (< 500 microsegundos). Asi obtenemos un tiempo mas 
+preciso. En concreto utilizamos k=10000 para ambos algoritmos cuando 
+fuese necesario.
+	
+Cabe destacar que todas las mediciones de tiempo estan tomadas en 
+microsegundos.
+Para ltodos los tipos de vectores usamos vectores de 
+longitud n con una progresion geometrica de n*2.
+
+A continuacion se muestran las tablas y los tiempos medidos para el 
+algoritmo auxord(v[],iz,dr) (Ordenacion aux):
+
+-------------------------------------------------------------------------
+Analisis ordenacion:
+
+Tabla tiempos - auxord - Ascendente
+
+---------------------------------------------------------------------------------------
+   	  n 		 t(n) 		 t(n)/n^1.8 	 t(n)/n^2 	 t(n)/n^2.2
+---------------------------------------------------------------------------------------
+*       500 		 304.329 	 0.0042189 	 0.0012173 	 0.0003512 
+       1000 		 1186.000 	 0.0047216 	 0.0011860 	 0.0002979 
+       2000 		 4458.000 	 0.0050967 	 0.0011145 	 0.0002437 
+       4000 		 17971.000 	 0.0059002 	 0.0011232 	 0.0002138 
+       8000 		 70167.000 	 0.0066156 	 0.0010964 	 0.0001817 
+      16000 		 279905.000 	 0.0075787 	 0.0010934 	 0.0001577 
+      32000 		 1131547.000 	 0.0087984 	 0.0011050 	 0.0001388 
+      64000 		 4475988.000 	 0.0099946 	 0.0010928 	 0.0001195 
+     128000 		 17975788.000 	 0.0115268 	 0.0010972 	 0.0001044
+
+Cotas utilizadas:
+	Cota inferior = n^1.8 --> Cota subestimada
+	Cota ajustada = n^2-> Tiende a 0.0010-0.0011
+	Cota superior =	n^2.2 --> Cota sobreestimada
+	
+
+-------------------------------------------------------------------------
+
+Tabla tiempos - auxord - Descendente
+---------------------------------------------------------------------------------------
+   	  n 		 t(n) 		 t(n)/n^1.8 	 t(n)/n^2 	 t(n)/n^2.2
+---------------------------------------------------------------------------------------
+        500 		 515.000 	 0.0071394 	 0.0020600 	 0.0005944 
+       1000 		 2047.000 	 0.0081493 	 0.0020470 	 0.0005142 
+       2000 		 8189.000 	 0.0093622 	 0.0020473 	 0.0004477 
+       4000 		 33019.000 	 0.0108407 	 0.0020637 	 0.0003929 
+       8000 		 131505.000 	 0.0123988 	 0.0020548 	 0.0003405 
+      16000 		 524174.000 	 0.0141925 	 0.0020476 	 0.0002954 
+      32000 		 2101404.000 	 0.0163395 	 0.0020522 	 0.0002577 
+      64000 		 8404614.000 	 0.0187670 	 0.0020519 	 0.0002243 
+     128000 		 33653953.000 	 0.0215803 	 0.0020541 	 0.0001955 
+
+
+Cotas utilizadas:
+	Cota inferior = n^1.8 --> Cota subestimada
+	Cota ajustada = n^2-> Tiende a 0.00204-0.00205
+	Cota superior =	n^2.2 --> Cota sobreestimada
+
+
+-------------------------------------------------------------------------
+
+Tabla tiempos - auxord - Aleatoria
+---------------------------------------------------------------------------------------
+   	  n 		 t(n) 		 t(n)/0.8*log(n) 	 t(n)/log(n) 	 t(n)/1.2*log(n)
+---------------------------------------------------------------------------------------
+*       500 		 40.437 	 0.0592735 	 	0.0233354 	 0.0005606 
+*      1000 		 89.177 	 0.0631325 	 	0.0224002 	 0.0003550 
+*      2000 		 195.949 	 0.0669980 	 	0.0214243 	 0.0002240 
+*      4000 		 429.741 	 0.0709649 	 	0.0204520 	 0.0001411 
+       8000 		 939.000 	 0.0748895 	 	0.0194517 	 0.0000885 
+      16000 		 2111.000 	 0.0813134 	 	0.0190346 	 0.0000572 
+      32000 		 4389.000 	 0.0816504 	 	0.0172260 	 0.0000341 
+      64000 		 9885.000 	 0.0888153 	 	0.0168873 	 0.0000221 
+     128000 		 19530.000 	 0.0847485 	 	0.0145228 	 0.0000125
+
+
+Cotas utilizadas:
+	Cota inferior = 0.8*log(n) --> Cota subestimada
+	Cota ajustada = log(n)-> Tiende a 0.002-0.01
+	Cota superior =	1.2*log(n) --> Cota sobreestimada
+
+
+-------------------------------------------------------------------------
+Conclusiones:
+
+Este algoritmos es un algoritmo rapido.
+
+Para vectores ordenados de manera aleatoria es mucho mas rapido este algoritmo
+y para ordenarlos de manera ascendente y descendente obtenemos practicamente los
+mismos resultados, no hay cambios notables.
+
+Las cotas analizadas empiricamente corresponden, en su gran medida, a las 
+esperadas con un analisis teorico de la complejidad.
+
+-------------------------------------------------------------------------
+Anomalias:
+* 
